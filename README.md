@@ -27,3 +27,9 @@ Then select the theme in `.zshrc`:
 ``` zsh
 ZSH_THEME="lime"
 ```
+
+## Demo
+
+### Lime
+
+![Lime](https://raw.githubusercontent.com/yous/zsh-themes/master/demo/lime.png)
