@@ -4,5 +4,5 @@ function prompt_char {
 
 PROMPT='%{$fg[cyan]%}%n %{$fg[green]%}%~ $(git_prompt_info)%{$reset_color%}$(prompt_char) '
 
-ZSH_THEME_GIT_PROMPT_PREFIX="[%{$fg[cyan]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[green]%}] "
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[cyan]%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[green]%} "
