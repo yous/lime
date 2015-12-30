@@ -6,7 +6,7 @@ Custom [Zsh](http://www.zsh.org) themes.
 
 ### Antigen
 
-I recommend you to use [Antigen](https://github.com/zsh-users/antigen).
+To load `lime.zsh-theme` on [Antigen](https://github.com/zsh-users/antigen):
 
 ``` zsh
 antigen theme yous/zsh-themes lime
@@ -26,6 +26,23 @@ Then select the theme in `.zshrc`:
 
 ``` zsh
 ZSH_THEME="lime"
+```
+
+### zgen
+
+To load `lime.zsh-theme` on [zgen](https://github.com/tarjoilija/zgen):
+
+``` zsh
+zgen load yous/zsh-themes lime
+```
+
+### zplug
+
+I recommend you to use [zplug](https://github.com/b4b4r07/zplug). To load
+`lime.zsh-theme`:
+
+``` sh
+zplug "yous/zsh-themes", of:"lime.zsh-theme"
 ```
 
 ## Demo
