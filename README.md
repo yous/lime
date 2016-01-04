@@ -1,6 +1,11 @@
 # Lime
 
+Simple standalone Zsh theme.
+
 <img width="570" alt="Lime" src="demo/lime.png">
+
+Colors are brought from [Tomorrow
+Night](https://github.com/chriskempson/tomorrow-theme#tomorrow-night).
 
 ## Usage
 
