@@ -50,3 +50,8 @@ zplug "yous/zsh-themes", of:"lime.zsh-theme"
 ### Lime
 
 ![Lime](https://raw.githubusercontent.com/yous/zsh-themes/master/demo/lime.png)
+
+## License
+
+Copyright (c) 2014-2016 Chayoung You. See [LICENSE.txt](LICENSE.txt) for
+details.
