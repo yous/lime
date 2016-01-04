@@ -1,6 +1,6 @@
 # Lime
 
-![Lime](https://raw.githubusercontent.com/yous/lime/master/demo/lime.png)
+<img width="570" alt="Lime" src="demo/lime.png">
 
 ## Usage
 
