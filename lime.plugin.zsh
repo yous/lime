@@ -1,5 +1,9 @@
 prompt_lime_user() {
-  echo '%F{109}%n%f'
+  if (( ${LIME_SHOW_HOSTNAME:-0} )) && [[ -n "$SSH_CONNECTION" ]]; then
+    echo '%F{109}%n@%m%f'
+  else
+    echo '%F{109}%n%f'
+  fi
 }
 
 prompt_lime_dir() {

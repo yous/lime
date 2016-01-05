@@ -43,6 +43,13 @@ Then select the theme in `.zshrc`:
 ZSH_THEME="lime"
 ```
 
+## Options
+
+### `LIME_SHOW_HOSTNAME`
+
+Set `LIME_SHOW_HOSTNAME=1` to see the hostname when you're connecting via SSH.
+The default value is `0`.
+
 ## License
 
 Copyright (c) 2014-2016 Chayoung You. See [LICENSE.txt](LICENSE.txt) for
