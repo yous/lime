@@ -1,3 +1,11 @@
+prompt_lime_user() {
+  echo '%F{109}%n%f'
+}
+
+prompt_lime_dir() {
+  echo '%F{143}%~%f'
+}
+
 prompt_lime_git() {
   # Get VCS information
   vcs_info
@@ -44,7 +52,7 @@ prompt_lime_setup() {
   zstyle ':vcs_info:git*' actionformats '%b(%a)' 'x%r'
 
   setopt prompt_subst
-  PROMPT='%F{109}%n%f %F{143}%~%f $(prompt_lime_git)$(prompt_lime_symbol) '
+  PROMPT='$(prompt_lime_user) $(prompt_lime_dir) $(prompt_lime_git)$(prompt_lime_symbol) '
 }
 
 prompt_lime_setup
