@@ -1,13 +1,15 @@
 prompt_lime_user() {
+  local prompt_color="${LIME_USER_COLOR:-109}"
   if (( ${LIME_SHOW_HOSTNAME:-0} )) && [[ -n "$SSH_CONNECTION" ]]; then
-    echo '%F{109}%n@%m%f'
+    echo "%F{${prompt_color}}%n@%m%f"
   else
-    echo '%F{109}%n%f'
+    echo "%F{${prompt_color}}%n%f"
   fi
 }
 
 prompt_lime_dir() {
-  echo '%F{143}%~%f'
+  local prompt_color="${LIME_DIR_COLOR:-143}"
+  echo "%F{${prompt_color}}%~%f"
 }
 
 prompt_lime_git() {
@@ -18,7 +20,8 @@ prompt_lime_git() {
   local working_tree="${vcs_info_msg_1_#x}"
   [[ -n $working_tree ]] || return
 
-  echo "%F{109}${vcs_info_msg_0_}$(prompt_lime_git_dirty)%f "
+  local prompt_color="${LIME_GIT_COLOR:-109}"
+  echo "%F{${prompt_color}}${vcs_info_msg_0_}$(prompt_lime_git_dirty)%f "
 }
 
 prompt_lime_git_dirty() {
