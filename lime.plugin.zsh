@@ -1,8 +1,10 @@
 # Outputs -1, 0, or 1 if the installed git version is less than, equal to, or
 # greater than the input version, respectively
 git_compare_version() {
-  local input_version=(${(s/./)1})
-  local installed_version=($(command git --version 2>/dev/null))
+  local input_version
+  local installed_version
+  input_version=(${(s/./)1})
+  installed_version=($(command git --version 2>/dev/null))
   installed_version=(${(s/./)installed_version[3]})
 
   for i in {1..3}; do
