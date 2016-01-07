@@ -31,7 +31,12 @@ prompt_lime_user() {
 
 prompt_lime_dir() {
   local prompt_color="${LIME_DIR_COLOR:-143}"
-  echo "%F{${prompt_color}}%~%f"
+  local dir_components="${LIME_DIR_DISPLAY_COMPONENTS:-0}"
+  if (( dir_components )); then
+    echo "%F{${prompt_color}}%($((dir_components + 1))~:...%${dir_components}~:%~)%f"
+  else
+    echo "%F{${prompt_color}}%~%f"
+  fi
 }
 
 prompt_lime_git() {

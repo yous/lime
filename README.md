@@ -50,6 +50,12 @@ ZSH_THEME="lime"
 Set `LIME_SHOW_HOSTNAME=1` to see the hostname when you're connecting via SSH.
 The default value is `0`.
 
+### `LIME_DIR_DISPLAY_COMPONENTS`
+
+The number of trailing components of the current working directory. If you set
+`LIME_DIR_DISPLAY_COMPONENTS=3`, it'll display `...bar/baz/qux` when you're on
+`~/foo/bar/baz/qux`. The default value is `0`, which shows the whole path.
+
 ### `LIME_USER_COLOR`
 
 Color for user and hostname, between `0` and `255`. Also you can set this with
