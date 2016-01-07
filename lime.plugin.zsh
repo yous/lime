@@ -47,7 +47,8 @@ prompt_lime_git() {
 }
 
 prompt_lime_git_dirty() {
-  local git_status_options=(--porcelain -unormal)
+  local git_status_options
+  git_status_options=(--porcelain -unormal)
   if [[ "$prompt_lime_git_post_1_7_2" -ge 0 ]]; then
     git_status_options+=(--ignore-submodules=dirty)
   fi
