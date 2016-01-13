@@ -20,6 +20,41 @@ git_compare_version() {
   echo 0
 }
 
+prompt_lime_precmd() {
+  # Set title
+  prompt_lime_set_title
+
+  # Get VCS information
+  vcs_info
+}
+
+prompt_lime_preexec() {
+  # Show the current job
+  prompt_lime_set_title $2
+}
+
+prompt_lime_set_title() {
+  # Set window name
+  print -n '\e]2;'
+  # Username
+  print -Pn '%n'
+  # Hostname
+  [[ -n "$SSH_CONNECTION" ]] && print -Pn '@%m'
+  # Current directory
+  print -Pn ': %~'
+  # Show current job
+  [ "$#" -eq 1 ] && print -n " ($1)"
+  # End of window name
+  print -n '\a'
+
+  # Set tab name
+  if [ "$#" -eq 1 ]; then
+    print -n "\e]1;$1\a"
+  else
+    print -Pn '\e]1;%~\a'
+  fi
+}
+
 prompt_lime_user() {
   local prompt_color="${LIME_USER_COLOR:-$prompt_lime_default_user_color}"
   if (( ${LIME_SHOW_HOSTNAME:-0} )) && [[ -n "$SSH_CONNECTION" ]]; then
@@ -40,9 +75,6 @@ prompt_lime_dir() {
 }
 
 prompt_lime_git() {
-  # Get VCS information
-  vcs_info
-
   # Store working_tree without the 'x' prefix
   local working_tree="${vcs_info_msg_1_#x}"
   [[ -n $working_tree ]] || return
@@ -71,6 +103,9 @@ prompt_lime_symbol() {
 }
 
 prompt_lime_setup() {
+  precmd_functions+=(prompt_lime_precmd)
+  preexec_functions+=(prompt_lime_preexec)
+
   autoload -Uz vcs_info
 
   zstyle ':vcs_info:*' enable git
