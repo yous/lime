@@ -105,6 +105,8 @@ prompt_lime_setup() {
     prompt_lime_default_git_color=cyan
   fi
 
+  # If set, parameter expansion, command substitution and arithmetic expansion
+  # is performed in prompts
   setopt prompt_subst
   PROMPT='$(prompt_lime_user) $(prompt_lime_dir) $(prompt_lime_git)$(prompt_lime_symbol) '
 }
