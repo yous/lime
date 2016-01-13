@@ -21,7 +21,7 @@ git_compare_version() {
 }
 
 prompt_lime_user() {
-  local prompt_color="${LIME_USER_COLOR:-109}"
+  local prompt_color="${LIME_USER_COLOR:-$prompt_lime_default_user_color}"
   if (( ${LIME_SHOW_HOSTNAME:-0} )) && [[ -n "$SSH_CONNECTION" ]]; then
     echo "%F{${prompt_color}}%n@%m%f"
   else
@@ -30,7 +30,7 @@ prompt_lime_user() {
 }
 
 prompt_lime_dir() {
-  local prompt_color="${LIME_DIR_COLOR:-143}"
+  local prompt_color="${LIME_DIR_COLOR:-$prompt_lime_default_dir_color}"
   local dir_components="${LIME_DIR_DISPLAY_COMPONENTS:-0}"
   if (( dir_components )); then
     echo "%F{${prompt_color}}%($((dir_components + 1))~:...%${dir_components}~:%~)%f"
@@ -47,7 +47,7 @@ prompt_lime_git() {
   local working_tree="${vcs_info_msg_1_#x}"
   [[ -n $working_tree ]] || return
 
-  local prompt_color="${LIME_GIT_COLOR:-109}"
+  local prompt_color="${LIME_GIT_COLOR:-$prompt_lime_default_git_color}"
   echo "%F{${prompt_color}}${vcs_info_msg_0_}$(prompt_lime_git_dirty)%f "
 }
 
@@ -93,6 +93,17 @@ prompt_lime_setup() {
 
   # The '--ignore-submodules' option is introduced on git 1.7.2
   prompt_lime_git_post_1_7_2=$(git_compare_version '1.7.2')
+
+  # Support 8 colors
+  if [[ "$TERM" = *"256color" ]]; then
+    prompt_lime_default_user_color=109
+    prompt_lime_default_dir_color=143
+    prompt_lime_default_git_color=109
+  else
+    prompt_lime_default_user_color=cyan
+    prompt_lime_default_dir_color=green
+    prompt_lime_default_git_color=cyan
+  fi
 
   setopt prompt_subst
   PROMPT='$(prompt_lime_user) $(prompt_lime_dir) $(prompt_lime_git)$(prompt_lime_symbol) '
