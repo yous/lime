@@ -61,17 +61,19 @@ The number of trailing components of the current working directory. If you set
 Color for user and hostname, between `0` and `255`. Also you can set this with
 color names. For the full list of the colors, see [this
 gist](https://gist.github.com/yous/c303055cf65a99d65488). The default value is
-`109`.
+`109` if you have 256 colors support, `cyan` otherwise.
 
 ### `LIME_DIR_COLOR`
 
 Color for the current directory, between `0` and `255`. Also you can set this
-with color names. The default value is `143`.
+with color names. The default value is `143` if you have 256 colors support,
+`green` otherwise.
 
 ### `LIME_GIT_COLOR`
 
 Color for the current git status, between `0` and `255`. Also you can set this
-with colors names. The default value is `109`.
+with colors names. The default value is `109` if you have 256 colors support,
+`cyan` otherwise.
 
 ## License
 
