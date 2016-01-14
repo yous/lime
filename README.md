@@ -75,5 +75,4 @@ with colors names. The default value is `109`.
 
 ## License
 
-Copyright (c) 2014-2016 Chayoung You. See [LICENSE.txt](LICENSE.txt) for
-details.
+Copyright © 2014-2016 Chayoung You. See [LICENSE.txt](LICENSE.txt) for details.
