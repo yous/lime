@@ -74,8 +74,7 @@ prompt_lime_tab_title() {
 }
 
 prompt_lime_first_command() {
-  emulate -L zsh
-  setopt extended_glob
+  setopt local_options extended_glob
 
   # Return the first command excluding env, options, sudo, ssh
   print -rn ${1[(wr)^(*=*|-*|sudo|ssh)]:gs/%/%%}
