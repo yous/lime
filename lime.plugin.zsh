@@ -70,6 +70,15 @@ prompt_lime_first_command() {
   print -rn ${1[(wr)^(*=*|-*|sudo|ssh)]:gs/%/%%}
 }
 
+prompt_lime_render() {
+  print -n "${prompt_lime_rendered_user}"
+  print -n ' '
+  prompt_lime_dir
+  print -n ' '
+  prompt_lime_git
+  print -n "${prompt_lime_rendered_symbol}"
+}
+
 prompt_lime_user() {
   local prompt_color="${LIME_USER_COLOR:-$prompt_lime_default_user_color}"
   if (( ${LIME_SHOW_HOSTNAME:-0} )) && [[ -n "$SSH_CONNECTION" ]]; then
@@ -154,10 +163,13 @@ prompt_lime_setup() {
     prompt_lime_default_git_color=cyan
   fi
 
+  prompt_lime_rendered_user="$(prompt_lime_user)"
+  prompt_lime_rendered_symbol="$(prompt_lime_symbol)"
+
   # If set, parameter expansion, command substitution and arithmetic expansion
   # is performed in prompts
   setopt prompt_subst
-  PROMPT='$(prompt_lime_user) $(prompt_lime_dir) $(prompt_lime_git)$(prompt_lime_symbol) '
+  PROMPT='$(prompt_lime_render) '
 }
 
 prompt_lime_setup
