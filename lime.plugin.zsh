@@ -30,7 +30,7 @@ prompt_lime_precmd() {
 
 prompt_lime_preexec() {
   # Show the current job
-  prompt_lime_set_title $2
+  prompt_lime_set_title "$1"
 }
 
 prompt_lime_set_title() {
