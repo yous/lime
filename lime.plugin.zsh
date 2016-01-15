@@ -105,8 +105,7 @@ prompt_lime_git_dirty() {
     git_status_options+=(--ignore-submodules=dirty)
   fi
 
-  test -z "$(command git status $git_status_options)"
-  (( $? )) && print -n '*'
+  [ -n "$(command git status $git_status_options)" ] && print -n '*'
 }
 
 prompt_lime_symbol() {
