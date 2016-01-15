@@ -40,14 +40,23 @@ prompt_lime_set_title() {
   # Inside screen or tmux
   if [[ "$TERM" == "screen"* ]]; then
     # Set window title
-    print -n "\e]0;${window_title}\a"
+    print -n '\e]0;'
+    echo -n "${window_title}"
+    print -n '\a'
+
     # Set window name
-    print -n "\ek${tab_title}\e\\"
+    print -n '\ek'
+    echo -n "${tab_title}"
+    print -n '\e\\'
   else
     # Set window title
-    print -n "\e]2;${window_title}\a"
+    print -n '\e]2;'
+    echo -n "${window_title}"
+    print -n '\a'
     # Set tab name
-    print -n "\e]1;${tab_title}\a"
+    print -n '\e]1;'
+    echo -n "${tab_title}"
+    print -n '\a'
   fi
 }
 
@@ -58,7 +67,7 @@ prompt_lime_window_title() {
 
 prompt_lime_tab_title() {
   if [ "$#" -eq 1 ]; then
-    print -n "$(prompt_lime_first_command "$1")"
+    echo -n "$(prompt_lime_first_command "$1")"
   else
     print -Pn '%~'
   fi
@@ -73,20 +82,20 @@ prompt_lime_first_command() {
 }
 
 prompt_lime_render() {
-  print -n "${prompt_lime_rendered_user}"
-  print -n ' '
+  echo -n "${prompt_lime_rendered_user}"
+  echo -n ' '
   prompt_lime_dir
-  print -n ' '
+  echo -n ' '
   prompt_lime_git
-  print -n "${prompt_lime_rendered_symbol}"
+  echo -n "${prompt_lime_rendered_symbol}"
 }
 
 prompt_lime_user() {
   local prompt_color="${LIME_USER_COLOR:-$prompt_lime_default_user_color}"
   if (( ${LIME_SHOW_HOSTNAME:-0} )) && [[ -n "$SSH_CONNECTION" ]]; then
-    print -Pn "%F{${prompt_color}}%n@%m%f"
+    echo -n "%F{${prompt_color}}%n@%m%f"
   else
-    print -Pn "%F{${prompt_color}}%n%f"
+    echo -n "%F{${prompt_color}}%n%f"
   fi
 }
 
@@ -94,9 +103,9 @@ prompt_lime_dir() {
   local prompt_color="${LIME_DIR_COLOR:-$prompt_lime_default_dir_color}"
   local dir_components="${LIME_DIR_DISPLAY_COMPONENTS:-0}"
   if (( dir_components )); then
-    print -Pn "%F{${prompt_color}}%($((dir_components + 1))~:...%${dir_components}~:%~)%f"
+    echo -n "%F{${prompt_color}}%($((dir_components + 1))~:...%${dir_components}~:%~)%f"
   else
-    print -Pn "%F{${prompt_color}}%~%f"
+    echo -n "%F{${prompt_color}}%~%f"
   fi
 }
 
@@ -106,7 +115,7 @@ prompt_lime_git() {
   [[ -n $working_tree ]] || return
 
   local prompt_color="${LIME_GIT_COLOR:-$prompt_lime_default_git_color}"
-  print -Pn "%F{${prompt_color}}${vcs_info_msg_0_}$(prompt_lime_git_dirty)%f "
+  echo -n "%F{${prompt_color}}${vcs_info_msg_0_}$(prompt_lime_git_dirty)%f "
 }
 
 prompt_lime_git_dirty() {
@@ -116,14 +125,14 @@ prompt_lime_git_dirty() {
     git_status_options+=(--ignore-submodules=dirty)
   fi
 
-  [ -n "$(command git status $git_status_options)" ] && print -n '*'
+  [ -n "$(command git status $git_status_options)" ] && echo -n '*'
 }
 
 prompt_lime_symbol() {
   if [ $UID -eq 0 ]; then
-    print -n '#'
+    echo -n '#'
   else
-    print -n '$'
+    echo -n '$'
   fi
 }
 
