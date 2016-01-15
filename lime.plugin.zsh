@@ -73,9 +73,9 @@ prompt_lime_first_command() {
 prompt_lime_user() {
   local prompt_color="${LIME_USER_COLOR:-$prompt_lime_default_user_color}"
   if (( ${LIME_SHOW_HOSTNAME:-0} )) && [[ -n "$SSH_CONNECTION" ]]; then
-    echo "%F{${prompt_color}}%n@%m%f"
+    print -Pn "%F{${prompt_color}}%n@%m%f"
   else
-    echo "%F{${prompt_color}}%n%f"
+    print -Pn "%F{${prompt_color}}%n%f"
   fi
 }
 
@@ -83,9 +83,9 @@ prompt_lime_dir() {
   local prompt_color="${LIME_DIR_COLOR:-$prompt_lime_default_dir_color}"
   local dir_components="${LIME_DIR_DISPLAY_COMPONENTS:-0}"
   if (( dir_components )); then
-    echo "%F{${prompt_color}}%($((dir_components + 1))~:...%${dir_components}~:%~)%f"
+    print -Pn "%F{${prompt_color}}%($((dir_components + 1))~:...%${dir_components}~:%~)%f"
   else
-    echo "%F{${prompt_color}}%~%f"
+    print -Pn "%F{${prompt_color}}%~%f"
   fi
 }
 
@@ -95,7 +95,7 @@ prompt_lime_git() {
   [[ -n $working_tree ]] || return
 
   local prompt_color="${LIME_GIT_COLOR:-$prompt_lime_default_git_color}"
-  echo "%F{${prompt_color}}${vcs_info_msg_0_}$(prompt_lime_git_dirty)%f "
+  print -Pn "%F{${prompt_color}}${vcs_info_msg_0_}$(prompt_lime_git_dirty)%f "
 }
 
 prompt_lime_git_dirty() {
@@ -106,14 +106,14 @@ prompt_lime_git_dirty() {
   fi
 
   test -z "$(command git status $git_status_options)"
-  (( $? )) && echo '*'
+  (( $? )) && print -n '*'
 }
 
 prompt_lime_symbol() {
   if [ $UID -eq 0 ]; then
-    echo '#'
+    print -n '#'
   else
-    echo '$'
+    print -n '$'
   fi
 }
 
