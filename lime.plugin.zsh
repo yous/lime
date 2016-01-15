@@ -34,25 +34,40 @@ prompt_lime_preexec() {
 }
 
 prompt_lime_set_title() {
-  # Set window name
-  print -n '\e]2;'
-  # Username
-  print -Pn '%n'
-  # Hostname
-  [[ -n "$SSH_CONNECTION" ]] && print -Pn '@%m'
-  # Current directory
-  print -Pn ': %~'
-  # Show current job
-  [ "$#" -eq 1 ] && print -n " ($1)"
-  # End of window name
-  print -n '\a'
+  # Set window title
+  print -n "\e]2;$(prompt_lime_window_title)\a"
 
-  # Set tab name
-  if [ "$#" -eq 1 ]; then
-    print -n "\e]1;$1\a"
+  local tab_name="$(prompt_lime_tab_title "$@")"
+
+  # Inside screen or tmux
+  if [ -n "$STY" ] || [ -n "$TMUX" ]; then
+    # Set window name
+    print -n "\ek${tab_name}\e\\"
   else
-    print -Pn '\e]1;%~\a'
+    # Set tab name
+    print -n "\e]1;${tab_name}\a"
   fi
+}
+
+prompt_lime_window_title() {
+  # Username, hostname and current directory
+  print -Pn '%n@%m: %~'
+}
+
+prompt_lime_tab_title() {
+  if [ "$#" -eq 1 ]; then
+    print -n "$(prompt_lime_first_command "$1")"
+  else
+    print -Pn '%~'
+  fi
+}
+
+prompt_lime_first_command() {
+  emulate -L zsh
+  setopt extended_glob
+
+  # Return the first command excluding env, options, sudo, ssh
+  print -rn ${1[(wr)^(*=*|-*|sudo|ssh)]:gs/%/%%}
 }
 
 prompt_lime_user() {
