@@ -34,18 +34,20 @@ prompt_lime_preexec() {
 }
 
 prompt_lime_set_title() {
-  # Set window title
-  print -n "\e]2;$(prompt_lime_window_title)\a"
-
-  local tab_name="$(prompt_lime_tab_title "$@")"
+  local window_title="$(prompt_lime_window_title)"
+  local tab_title="$(prompt_lime_tab_title "$@")"
 
   # Inside screen or tmux
-  if [ -n "$STY" ] || [ -n "$TMUX" ]; then
+  if [[ "$TERM" == "screen"* ]]; then
+    # Set window title
+    print -n "\e]0;${window_title}\a"
     # Set window name
-    print -n "\ek${tab_name}\e\\"
+    print -n "\ek${tab_title}\e\\"
   else
+    # Set window title
+    print -n "\e]2;${window_title}\a"
     # Set tab name
-    print -n "\e]1;${tab_name}\a"
+    print -n "\e]1;${tab_title}\a"
   fi
 }
 
