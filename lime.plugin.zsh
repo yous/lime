@@ -38,26 +38,39 @@ prompt_lime_set_title() {
   local tab_title="$(prompt_lime_tab_title "$@")"
 
   # Inside screen or tmux
-  if [[ "$TERM" == "screen"* ]]; then
-    # Set window title
-    print -n '\e]0;'
-    echo -n "${window_title}"
-    print -n '\a'
+  case "$TERM" in
+    screen*)
+      # Set window title
+      print -n '\e]0;'
+      echo -n "${window_title}"
+      print -n '\a'
 
-    # Set window name
-    print -n '\ek'
-    echo -n "${tab_title}"
-    print -n '\e\\'
-  else
-    # Set window title
-    print -n '\e]2;'
-    echo -n "${window_title}"
-    print -n '\a'
-    # Set tab name
-    print -n '\e]1;'
-    echo -n "${tab_title}"
-    print -n '\a'
-  fi
+      # Set window name
+      print -n '\ek'
+      echo -n "${tab_title}"
+      print -n '\e\\'
+      ;;
+    cygwin|putty*|rxvt*|xterm*)
+      # Set window title
+      print -n '\e]2;'
+      echo -n "${window_title}"
+      print -n '\a'
+
+      # Set tab name
+      print -n '\e]1;'
+      echo -n "${tab_title}"
+      print -n '\a'
+      ;;
+    *)
+      # Set window title if it's available
+      zmodload zsh/terminfo
+      if [[ -n "$terminfo[tsl]" ]] && [[ -n "$terminfo[fsl]" ]]; then
+        echoti tsl
+        echo -n "${window_title}"
+        echoti fsl
+      fi
+      ;;
+  esac
 }
 
 prompt_lime_window_title() {
