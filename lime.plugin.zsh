@@ -82,7 +82,10 @@ prompt_lime_tab_title() {
   if [ "$#" -eq 1 ]; then
     echo -n "$(prompt_lime_first_command "$1")"
   else
-    print -Pn '%~'
+    # `%40<..<` truncates following string longer than 40 characters with `..`.
+    # `%~` is current working directory with `~` instead of full `$HOME` path.
+    # `%<<` sets the end of string to truncate.
+    print -Pn '%40<..<%~%<<'
   fi
 }
 
