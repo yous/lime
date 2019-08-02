@@ -4,8 +4,7 @@ Simple standalone Zsh theme.
 
 <img width="570" alt="Lime" src="demo/lime.png">
 
-Colors are brought from [Tomorrow
-Night](https://github.com/chriskempson/tomorrow-theme#tomorrow-night).
+Colors are brought from [Tomorrow Night](https://github.com/chriskempson/tomorrow-theme#tomorrow-night).
 
 ## Usage
 
@@ -21,10 +20,16 @@ antigen bundle yous/lime
 zgen load yous/lime
 ```
 
-### [zplug](https://github.com/b4b4r07/zplug)
+### [zplug](https://github.com/zplug/zplug)
 
 ``` zsh
 zplug "yous/lime"
+```
+
+### [zplugin](https://github.com/zdharma/zplugin)
+
+``` zsh
+zplugin light yous/lime
 ```
 
 ### [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
@@ -59,9 +64,8 @@ The number of trailing components of the current working directory. If you set
 ### `LIME_USER_COLOR`
 
 Color for user and hostname, between `0` and `255`. Also you can set this with
-color names. For the full list of the colors, see [this
-gist](https://gist.github.com/yous/c303055cf65a99d65488). The default value is
-`109` if you have 256 colors support, `cyan` otherwise.
+color names. For the full list of the colors, see [this gist](https://gist.github.com/yous/c303055cf65a99d65488).
+The default value is `109` if you have 256 colors support, `cyan` otherwise.
 
 ### `LIME_DIR_COLOR`
 
@@ -77,4 +81,4 @@ with colors names. The default value is `109` if you have 256 colors support,
 
 ## License
 
-Copyright © 2014-2016 Chayoung You. See [LICENSE.txt](LICENSE.txt) for details.
+Copyright © Chayoung You. See [LICENSE.txt](LICENSE.txt) for details.
